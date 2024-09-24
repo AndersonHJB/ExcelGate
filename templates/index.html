@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线Excel表格</title>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <h1>在线Excel表格</h1>
+    <p>当前角色: {{ role }}</p>
+    <button onclick="logout()">退出登录</button>
+    <table border="1">
+        {% for row in sheet_data %}
+        <tr>
+            {% for cell in row %}
+            <td>
+                <input type="text" value="{{ cell }}"
+                {% if role == 'customer' and cell != '' %}disabled{% endif %}>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <button onclick="saveData()">发布修改</button>
+
+</body>
+</html>
